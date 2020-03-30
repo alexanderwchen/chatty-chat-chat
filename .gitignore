@@ -29,3 +29,5 @@ Desktop.ini
 # Files created by Eclipse projects (Egit)
 .classpath
 .project
+
+*.mdj
