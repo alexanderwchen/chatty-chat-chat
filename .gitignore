@@ -33,5 +33,5 @@ Desktop.ini
 *.mdj
 
 # Files created by IntelliJ projects (Egit)
-.idea
-.bin
+.idea/
+bin/
