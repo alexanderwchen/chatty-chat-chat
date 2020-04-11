@@ -85,7 +85,6 @@ public class ChattyChatChatClient{
             catch(IOException e){
                 System.out.println("Error while communicating to server");
             }
-            System.out.println("Runnable terminated");
         }
     }
 }
