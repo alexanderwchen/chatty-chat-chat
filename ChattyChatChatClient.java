@@ -51,8 +51,8 @@ public class ChattyChatChatClient{
         }
 
         catch(Exception e){
-            System.out.println("Unknown Error Occurred");
-            e.printStackTrace();
+            System.out.print("Unknown Error Occurred: ");
+            System.out.println(e.getMessage());
         }
     }
 
