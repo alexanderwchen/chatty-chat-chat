@@ -18,11 +18,11 @@ public class ChattyChatChatServer{
             }
 
             int port = Integer.parseInt(args[0]);
-            ServerSocket listener = null;
-            Socket socket = null;
+            ServerSocket listener;
+            Socket socket;
             boolean runServer = true;
             int clientNumber = 0;
-            clientRunnables = new ArrayList<ClientRunnable>();
+            clientRunnables = new ArrayList<>();
 
             try{
                 listener = new ServerSocket( port );
@@ -62,16 +62,17 @@ public class ChattyChatChatServer{
         private BufferedReader in;
         private PrintWriter out;
 
-        public String getUsername(){return username;};
-        public int getClientNumber(){return clientNumber;};
-        public boolean getIsRunning(){return isRunning;};
+        public String getUsername(){return username;}
+
+        public int getClientNumber(){return clientNumber;}
+        public boolean getIsRunning(){return isRunning;}
 
 
 
         public ClientRunnable(Socket socket, int clientNumber){
             this.socket = socket;
             this.clientNumber = clientNumber;
-            username = "user" + Integer.toString(clientNumber);
+            username = "user" + clientNumber;
             isRunning = true;
             in = null;
             out = null;
@@ -101,9 +102,6 @@ public class ChattyChatChatServer{
                             break;
                         case "/quit":
                             quit();
-                            break;
-                        case "/name":
-                            out.println(username);
                             break;
                         case "/dm":
                             dm(inputArray);
