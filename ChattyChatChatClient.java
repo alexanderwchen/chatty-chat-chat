@@ -8,7 +8,6 @@ public class ChattyChatChatClient{
 
     public static void main(String[] args){
         try {
-            System.out.println("Start ChattyChatChatClient");
 
             if(args.length != 2)
             {
@@ -17,14 +16,13 @@ public class ChattyChatChatClient{
 
             String hostname = args[0];
             int port = Integer.parseInt(args[1]);
-            Socket socket = null;
+            Socket socket;
             ChatRunnable chatRunnable;
 
             try{
                 socket = new Socket( hostname, port );
 
                 new Thread(chatRunnable = new ChatRunnable(socket)).start();
-
 
                 PrintWriter out = new PrintWriter( socket.getOutputStream(), true);
                 BufferedReader userIn = new BufferedReader(
@@ -46,8 +44,6 @@ public class ChattyChatChatClient{
             catch(IOException e){
                 System.out.println("Error connecting to server");
             }
-
-            System.out.println("End ChattyChatChatClient");
         }
 
         catch(Exception e){
@@ -65,7 +61,6 @@ public class ChattyChatChatClient{
         public ChatRunnable(Socket socket){
             this.socket = socket;
             done = false;
-
         }
         @Override
         public void run() {
@@ -75,7 +70,7 @@ public class ChattyChatChatClient{
                     System.out.println( in.readLine() );
                 }
                 while(!done){
-                    String response = null;
+                    String response;
                     try {
                         response = in.readLine();
                         if(response != null){

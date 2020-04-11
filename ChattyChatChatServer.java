@@ -12,7 +12,6 @@ public class ChattyChatChatServer{
 
     public static void main(String[] args){
         try {
-            System.out.println("Start ChattyChatChatServer");
             if (args.length != 1) {
                 throw new Exception("Invalid number of arguments");
             }
@@ -25,13 +24,14 @@ public class ChattyChatChatServer{
             clientRunnables = new ArrayList<>();
 
             try{
+                System.out.println("Server set up. Looking for client connections...");
                 listener = new ServerSocket( port );
 
                 while(runServer){
                     try {
                         socket = null;
                         socket = listener.accept();
-                        System.out.println("New Connection Made: " + socket.toString());
+                        System.out.println("New connection made: " + socket.toString());
                         ClientRunnable tempClientRunnable = new ClientRunnable(socket,clientNumber);
                         clientRunnables.add(tempClientRunnable);
                         new Thread(tempClientRunnable).start();
@@ -45,8 +45,6 @@ public class ChattyChatChatServer{
             catch(IOException e){
                 System.out.println("Error establishing listener");
             }
-
-            System.out.println("End ChattyChatChatServer");
         }
         catch(Exception e){
             System.out.println("Unknown Error Occurred");
@@ -63,11 +61,8 @@ public class ChattyChatChatServer{
         private PrintWriter out;
 
         public String getUsername(){return username;}
-
         public int getClientNumber(){return clientNumber;}
         public boolean getIsRunning(){return isRunning;}
-
-
 
         public ClientRunnable(Socket socket, int clientNumber){
             this.socket = socket;
@@ -89,14 +84,9 @@ public class ChattyChatChatServer{
 
                 while(isRunning){
                     String input = in.readLine();
-                    String response = "";
-
-                    if ( input != null ) {
-                        out.println("SERVER: You've entered " + input);
-                    }
 
                     String[] inputArray = input.split(" ", 3);
-                    switch(inputArray[0]){
+                    switch (inputArray[0]) {
                         case "/nick":
                             changeNick(inputArray);
                             break;
@@ -107,13 +97,10 @@ public class ChattyChatChatServer{
                             dm(inputArray);
                             break;
                         default:
-                            response = "SERVER: DEFAULT";
                             message(input);
                             break;
                     }
 
-                    System.out.println("Received \"" + input + "\" from client " + clientNumber + " (" + username + ")");
-                    System.out.println("Sent \"" + response + "\" to client " + clientNumber + " (" + username + ")");
                 }
             }
             catch(IOException e){
