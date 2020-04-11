@@ -104,6 +104,10 @@ public class ChattyChatChatServer{
                             break;
                         case "/name":
                             out.println(username);
+                            break;
+                        case "/dm":
+                            dm(inputArray);
+                            break;
                         default:
                             response = "SERVER: DEFAULT";
                             message(input);
@@ -130,7 +134,6 @@ public class ChattyChatChatServer{
                     System.out.println("Connection to client " + clientNumber + " closed");
                 }
             }
-
         }
 
         private void message(String input){
@@ -149,8 +152,26 @@ public class ChattyChatChatServer{
                 username = inputArray[1];
             }
         }
-        private void dm(){
-
+        private void dm(String[] inputArray){
+            if(inputArray.length < 3){
+                send("SERVER: No message provided");
+            }
+            else {
+                send("searching for:" + inputArray[1]);
+                boolean isFound = false;
+                for( ClientRunnable cr : ChattyChatChatServer.clientRunnables){
+                    if(cr.getUsername().equals(inputArray[1])){
+                        isFound = true;
+                        cr.send(username + " to you (private): " + inputArray[2]);
+                    }
+                }
+                if(isFound) {
+                    send(username + " to " + inputArray[1] + " (private): " + inputArray[2]);
+                }
+                else{
+                    send("SERVER: " + inputArray[1] + " not found");
+                }
+            }
         }
 
         public void send( String message ){
