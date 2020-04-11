@@ -134,6 +134,7 @@ public class ChattyChatChatServer{
             }
             else {
                 send("SERVER: Username changed from " + username + " to " + inputArray[1]);
+                System.out.println(socket.toString() + " username changed to " + inputArray[1]);
                 username = inputArray[1];
             }
         }
