@@ -96,6 +96,9 @@ public class ChattyChatChatServer{
                         case "/dm":
                             dm(inputArray);
                             break;
+                        case "/list":
+                            list();
+                            break;
                         default:
                             message(input);
                             break;
@@ -145,7 +148,7 @@ public class ChattyChatChatServer{
             else {
                 send("searching for:" + inputArray[1]);
                 boolean isFound = false;
-                for( ClientRunnable cr : ChattyChatChatServer.clientRunnables){
+                for( ClientRunnable cr : ChattyChatChatServer.clientRunnables ){
                     if(cr.getUsername().equals(inputArray[1])){
                         isFound = true;
                         cr.send(username + " to you (private): " + inputArray[2]);
@@ -160,6 +163,13 @@ public class ChattyChatChatServer{
             }
         }
 
+        private void list(){
+            send("List of all users currently online:");
+
+            for( ClientRunnable cr : ChattyChatChatServer.clientRunnables ){
+                send("\t" + cr.getUsername());
+            }
+        }
         public void send( String message ){
             out.println(message);
         }
