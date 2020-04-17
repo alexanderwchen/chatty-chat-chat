@@ -133,20 +133,19 @@ public class ChattyChatChatServer{
         }
         private void changeNick(String[] inputArray){
             if(inputArray.length < 2){
-                send("SERVER: No new username provided");
+                send("No new username provided");
             }
             else {
-                send("SERVER: Username changed from " + username + " to " + inputArray[1]);
+                send("Username changed from " + username + " to " + inputArray[1]);
                 System.out.println(socket.toString() + " username changed to " + inputArray[1]);
                 username = inputArray[1];
             }
         }
         private void dm(String[] inputArray){
             if(inputArray.length < 3){
-                send("SERVER: No message provided");
+                send("No message provided");
             }
             else {
-                send("searching for:" + inputArray[1]);
                 boolean isFound = false;
                 for( ClientRunnable cr : ChattyChatChatServer.clientRunnables ){
                     if(cr.getUsername().equals(inputArray[1])){
@@ -158,7 +157,7 @@ public class ChattyChatChatServer{
                     send(username + " to " + inputArray[1] + " (private): " + inputArray[2]);
                 }
                 else{
-                    send("SERVER: " + inputArray[1] + " not found");
+                    send(inputArray[1] + " not found");
                 }
             }
         }
