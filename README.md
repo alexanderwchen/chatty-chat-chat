@@ -1,4 +1,4 @@
-# Chatty Chat Chat Protocol
+# Chatty Chat Chat Application
 
 - [About](#about)
 - [Tasks](#tasks)
