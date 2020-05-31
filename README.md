@@ -1,10 +1,14 @@
 # Chatty Chat Chat Protocol
 
+- [About](#about)
 - [Tasks](#tasks)
 - [Description](#description)
 - [Setup](#setup)
 - [Chat Protocols and commands](#chat-protocol-and-commands)
-- [About](#about)
+
+## About
+- COSC 150 - Advanced Programming, Project 4
+- Made by Alex Chen, April 2020
 
 ## Tasks
 
@@ -94,7 +98,3 @@ will provide a list of all users using their original or renamed nicknames.
 
 #### Other
 - Any other input (including one beginning with a slash, but not exactly matching the above) will be considered a regular message.      
-
-## About
-- COSC 150 - Advanced Programming, Project 4
-- Made by Alex Chen, April 2020
